@@ -254,10 +254,10 @@ class Test:
             # run mm-tunnelserver
             if self.server_side == self.sender_side:
                 ts_cmd = ('mm-tunnelserver --ingress-log=%s --egress-log=%s' %
-                         (self.datalink_ingress_logs[i], self.acklink_egress_logs[i]))
+                         (self.acklink_ingress_logs[i], self.datalink_egress_logs[i]))
             else:
                 ts_cmd = ('mm-tunnelserver --ingress-log=%s --egress-log=%s' %
-                         (self.acklink_ingress_logs[i], self.datalink_egress_logs[i]))
+                         (self.datalink_ingress_logs[i], self.acklink_egress_logs[i]))
 
             if self.server_side == 'remote':
                 if self.remote_if:
@@ -291,10 +291,10 @@ class Test:
             # run mm-tunnelclient
             if self.server_side == self.sender_side:
                 tc_cmd = ('%s --ingress-log=%s --egress-log=%s' %
-                    (' '.join(cmd), self.acklink_ingress_logs[i], self.datalink_egress_logs[i]))
+                    (' '.join(cmd), self.datalink_ingress_logs[i], self.acklink_egress_logs[i]))
             else:
                 tc_cmd = ('%s --ingress-log=%s --egress-log=%s' %
-                    (' '.join(cmd), self.datalink_ingress_logs[i], self.acklink_egress_logs[i]))
+                    (' '.join(cmd), self.acklink_ingress_logs[i], self.datalink_egress_logs[i]))
 
             if self.server_side == 'remote':
                 if self.local_if:
@@ -421,11 +421,11 @@ class Test:
                 scp_cmd += '%(log)s %(log)s'
 
                 if self.sender_side == 'remote':
-                    check_call(scp_cmd % {'log': self.datalink_ingress_logs[i]}, shell=True)
-                    check_call(scp_cmd % {'log': self.acklink_egress_logs[i]}, shell=True)
-                else:
                     check_call(scp_cmd % {'log': self.acklink_ingress_logs[i]}, shell=True)
                     check_call(scp_cmd % {'log': self.datalink_egress_logs[i]}, shell=True)
+                else:
+                    check_call(scp_cmd % {'log': self.datalink_ingress_logs[i]}, shell=True)
+                    check_call(scp_cmd % {'log': self.acklink_egress_logs[i]}, shell=True)
 
             uid = uuid.uuid4()
             datalink_tun_log = (
