@@ -7,6 +7,9 @@ echo "Ctrl-C to exit."
 
 sleep 3
 
+cat ~/.ssh/config
+cat ~/.ssh/authorized_keys
+
 if [ -e ~/.ssh/id_rsa ]
 then
     echo "id_rsa already exists, exiting"
