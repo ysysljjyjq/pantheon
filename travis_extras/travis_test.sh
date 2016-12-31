@@ -2,6 +2,7 @@
 
 echo "Adding credentials to ~/.ssh for testing."
 echo "Do NOT run this on your personal account."
+echo "Private key is visible to all in github repository"
 echo "Ctrl-C to exit."
 
 sleep 3
@@ -18,11 +19,23 @@ then
     exit 1
 fi
 
+if [ -e ~/.ssh/authorized_keys ]
+then
+    echo "ssh authorized_keys already exists, exiting"
+    exit 1
+fi
+
+if [ -e ~/.ssh/config ]
+then
+    echo "ssh config already exists, exiting"
+    exit 1
+fi
+
 cp travis_extras/id_rsa ~/.ssh/id_rsa
 cp travis_extras/id_rsa.pub ~/.ssh/id_rsa.pub
 chmod 600 ~/.ssh/id_rsa
 chmod 644 ~/.ssh/id_rsa.pub
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
 
 # set up ssh multiplexing
 cp travis_extras/travis_ssh_config ~/.ssh/config
