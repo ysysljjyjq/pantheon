@@ -61,11 +61,11 @@ for scheme in common_schemes:
     exp1_mean_delay = np.mean(exp1_delays)
     exp2_mean_delay = np.mean(exp2_delays)
 
-    delay_lines.append([scheme, 'delay (ms)', fmt(exp1_mean_delay),
+    delay_lines.append([scheme, '95th percentile delay (ms)', fmt(exp1_mean_delay),
                fmt(exp2_mean_delay),
                fmt(get_difference(exp1_mean_delay, exp2_mean_delay))])
 
-output_headers = ['scheme', 'metric', experiment_dirs[0], experiment_dirs[1],
+output_headers = ['scheme', 'aggregate metric', experiment_dirs[0], experiment_dirs[1],
                   'difference %']
 
 print tabulate(throughput_lines + delay_lines, headers=output_headers)
