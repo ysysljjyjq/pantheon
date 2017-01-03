@@ -33,6 +33,18 @@ And before perorming analysis run:
 analysis/analysis_pre_setup.py
 ```
 
+## Running the Pantheon
+Running:
+
+```
+test/run.py
+```
+
+Will setup and run all congestion control schemes locally (and remotely if the `-r` flag is used). Multiple flows can be run simultaneously with `-f`. The running time of each scheme can be specified with `-t` and the entire experiment can be run multiple times using `--run-times`. Logs of all packets sent and recieved will be written to `test/` for later analysis.
+
+
+Run `test/run.py -h` for detailed usage.
+
 ## Running a single congestion control scheme
 Currently supported schemes can be found in `src/`
 
