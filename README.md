@@ -44,8 +44,10 @@ Run `test/run.py -h` for detailed usage and additional optional arguments.
 
 To run over an arbitrary set of mahimahi shells locally run:
 ```
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
 test/run.py --run-only setup
-mm-delay 50 mm-loss uplink .1 mm-loss downlink .1 mm-link /usr/share/mahimahi/traces/TMobile-LTE-short.up /usr/share/mahimahi/traces/TMobile-LTE-short.down --uplink-queue=drophead --uplink-queue-args="packets=50" -- sh -c 'test/run.py -r $USER@$MAHIMAHI_BASE:pantheon --run-only test'  # assumes pantheon in home directory
+mm-delay 50 mm-loss uplink .1 mm-loss downlink .1 mm-link /usr/share/mahimahi/traces/TMobile-LTE-short.up /usr/share/mahimahi/traces/TMobile-LTE-short.down -- sh -c 'test/run.py -r $USER@$MAHIMAHI_BASE:pantheon --run-only test'  # assumes pantheon in home directory
 ```
 
 ## Running a single congestion control scheme
