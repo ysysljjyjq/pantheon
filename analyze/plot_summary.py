@@ -12,6 +12,7 @@ import matplotlib.ticker as ticker
 from os import path
 from time import strftime
 from datetime import datetime
+from multiprocessing.pool import ThreadPool
 from helpers.pantheon_help import (check_output, get_friendly_names, Popen,
                                    PIPE, get_color_names, get_marker_names)
 from helpers.parse_arguments import parse_arguments
@@ -172,8 +173,14 @@ class PlotSummary:
             self.data[cc] = []
             cc_name = self.friendly_names[cc]
 
+
+            pool = ThreadPool(processes=self.run_times)
+            results = dict()
             for run_id in xrange(1, 1 + self.run_times):
-                (tput, delay, for_stats) = self.parse_tunnel_log(cc, run_id)
+                results[run_id] = pool.apply_async(self.parse_tunnel_log, args=(cc, run_id))
+
+            for run_id in xrange(1, 1 + self.run_times):
+                (tput, delay, for_stats) = results[run_id].get()
                 ofst = self.parse_stats_log(cc, run_id, for_stats)
 
                 if not tput or not delay:
