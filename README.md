@@ -2,7 +2,7 @@
 (https://travis-ci.org/StanfordLPNG/pantheon)
 
 # Disclaimer:
-This is unfinished research software. Multiple scripts run commands as root to install prerequisite programs, etc. Our scripts will write to the filesystem in the pantheon folder and in /tmp/. We have not implemented most of the programs run by our wrappers. Those programs may write to the filesytem (for example, Verus will write files like `client_45191.out` into the current working directory when it is called). We never run third party programs as root, but we can not guarantee they will never try to escalate privaledge to root.
+This is unfinished research software. Multiple scripts run commands as root to install prerequisite programs, update package lists, etc. Our scripts will write to the filesystem in the pantheon folder and in /tmp/. We have not implemented most of the programs run by our wrappers. Those programs may write to the filesytem (for example, Verus will write files like `client_45191.out` into the current working directory when it is called). We never run third party programs as root, but we can not guarantee they will never try to escalate privaledge to root.
 
 Run at your own risk.
 
@@ -34,9 +34,9 @@ analysis/analysis_pre_setup.py
 ```
 
 ## Running a single congestion control scheme
-Currently the supported schemes are in `src/`
+Currently supported schemes can be found in `src/`
 
-To make and install the `sprout` and it's dependencies:
+To make and install the `sprout` and it's dependencies run:
 
 ```
 test/setup.py sprout
@@ -44,12 +44,12 @@ test/setup.py sprout
 
 Run `test/setup.py -h` for detailed usage.
 
-To test `sprout` over an emulated link:
+To test `sprout` over an emulated link run:
 ```
 test/test.py [-t RUNTIME] [-f FLOWS] congestion-control
 ```
 
-To setup and test `sprout` over the wide area to a remote machine:
+To setup and test `sprout` over the wide area to a remote machine run:
 ```
 test/pre_setup.py -r REMOTE:PANTHEON-DIR
 test/setup.py -r REMOTE:PANTHEON-DIR sprout
