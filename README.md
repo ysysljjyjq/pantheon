@@ -46,12 +46,12 @@ mm-delay 50 mm-loss uplink .1 mm-loss downlink .1 mm-link /usr/share/mahimahi/tr
 ```
 
 ## Pantheon analysis
-And before perorming analysis run:
+Before perorming analysis run:
 ```
 analysis/analysis_pre_setup.py
 ```
 
-To perform analysis on experiment logs in the `test/` directory:
+To analyze experiment logs in the `test/` directory run:
 ```
 analyze/analyze.py --data-dir test/
 ```
