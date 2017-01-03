@@ -23,10 +23,6 @@ To add submodules after cloning, run:
 git submodule update --init
 ```
 
-Additionally, before performing experiments run:
-```
-test/pre_setup.py
-```
 
 And before perorming analysis run:
 ```
@@ -34,19 +30,22 @@ analysis/analysis_pre_setup.py
 ```
 
 ## Running the Pantheon
-Running:
+Currently supported schemes can be found in `src/`. Running:
 
 ```
 test/run.py
 ```
 
-Will setup and run all congestion control schemes locally (and remotely if the `-r` flag is used). Multiple flows can be run simultaneously with `-f`. The running time of each scheme can be specified with `-t` and the entire experiment can be run multiple times using `--run-times`. Logs of all packets sent and recieved will be written to `test/` for later analysis.
+Will setup and run all congestion control schemes in the Pantheon locally (and remotely if the `-r` flag is used). Multiple flows can be run simultaneously with `-f`. The running time of each scheme can be specified with `-t` and the entire experiment can be run multiple times using `--run-times`. Logs of all packets sent and recieved will be written to `test/` for later analysis.
 
 
-Run `test/run.py -h` for detailed usage.
+Run `test/run.py -h` for detailed usage and additional optional arguments.
 
 ## Running a single congestion control scheme
-Currently supported schemes can be found in `src/`
+Before performing experiments individually run:
+```
+test/pre_setup.py
+```
 
 To make and install the `sprout` and it's dependencies run:
 
@@ -54,7 +53,7 @@ To make and install the `sprout` and it's dependencies run:
 test/setup.py sprout
 ```
 
-Run `test/setup.py -h` for detailed usage.
+Run `test/setup.py -h` for detailed usage and additional optional arguments.
 
 To test `sprout` over an emulated link run:
 ```
@@ -68,7 +67,7 @@ test/setup.py -r REMOTE:PANTHEON-DIR sprout
 test/test.py -r REMOTE:PANTHEON-DIR [-t RUNTIME] [-f FLOWS] sprout
 ```
 
-Run `test/test.py -h` for detailed usage.
+Run `test/test.py -h` for detailed usage and additional optional arguments.
 
 
 `-f 0` indicates that no tunnels would be created in the tests; otherwise,
@@ -80,12 +79,6 @@ Alternatively, run
 ```
 ./run.py [-r REMOTE:PANTHEON-DIR] [-t RUNTIME] [-f FLOWS]
 ```
-
-to set up and test all congestion control schemes. In addition, a summary
-report `pantheon_report.pdf` of the experiments will be generated.
-
-Run `./test.py -h` and `./run.py -h` for detailed usage, including more
-optional arguments.
 
 ## Usage of Individual Scheme
 Change directory to `src` first.
