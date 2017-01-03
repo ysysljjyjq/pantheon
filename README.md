@@ -1,9 +1,12 @@
 [![Build Status](https://travis-ci.org/StanfordLPNG/pantheon.svg?branch=master)]
 (https://travis-ci.org/StanfordLPNG/pantheon)
 
+# Disclaimer:
+This is unfinished research software. Multiple scripts run commands as root to install prerequisite programs, etc. Our scripts will write to the filesystem in the pantheon folder and in /tmp/. We have not implemented most of the programs run by our wrappers. Those programs may write to the filesytem (for example, verus will write files like client\_45191.out into the current working directory when it is called). We never run third party programs as root.
+
 # Pantheon of Congestion Control
-Pantheon tests can be run locally over emulated mahimahi link or between local
-and remote machines over real networks.
+The Pantheon has wrappers for many popular and research congestion control schemes. It allows them to run over a common interface and has tools to benchmark and compare their performance.
+Pantheon tests can be run locally over an emulated link using [mahimahi](http://mahimahi.mit.edu/) or over the internet to a remote machine.
 
 ## Preparation
 On local machine (and remote machine), clone the repository and get submodules:
