@@ -11,56 +11,53 @@ The Pantheon has wrappers for many popular and research congestion control schem
 Pantheon tests can be run locally over an emulated link using [mahimahi](http://mahimahi.mit.edu/) or over the internet to a remote machine.
 
 ## Preparation
-On local machine (and remote machine), clone the repository and get submodules:
+Many of the tools and programs run by the Pantheon are git submodules in the `third_party` folder.
+To clone this repository, including submodules, run:
 
 ```
-git clone https://github.com/StanfordLPNG/pantheon.git
+git clone --recursive https://github.com/StanfordLPNG/pantheon.git
+```
+
+To add submodules after cloning, run:
+```
 git submodule update --init
 ```
 
-Install dependencies to generate summary plots and reports of experiments:
-
+Additionally, before performing experiments run:
 ```
-sudo apt-get install texlive python-matplotlib ntp
-```
-
-## Setup
-First, change directory to `test` and run:
-
-```
-./pre_setup.py
+test/pre_setup.py
 ```
 
-Then
-
+And before perorming analysis run:
 ```
-./setup.py congestion-control
-```
-
-Currently the supported `congestion-control` is `default_tcp`, `vegas`,
-`ledbat`, `pcc`, `scream`, `sprout`, `verus`, `koho_cc`, `webrtc` and `quic`.
-
-Alternatively, set up on both local and remote machines:
-
-```
-./pre_setup.py -r REMOTE:PANTHEON-DIR
-./setup.py -r REMOTE:PANTHEON-DIR congestion-control
+analysis/analysis_pre_setup.py
 ```
 
-Run `./setup.py -h` for detailed usage.
+## Running a single congestion control scheme
+Currently the supported schemes are in `src/`
 
-## Test
-Test congestion control schemes on local machine:
-
-```
-./test.py [-t RUNTIME] [-f FLOWS] congestion-control
-```
-
-or between local machine and remote machine:
+To make and install the `sprout` and it's dependencies:
 
 ```
-./test.py -r REMOTE:PANTHEON-DIR [-t RUNTIME] [-f FLOWS] congestion-control
+test/setup.py sprout
 ```
+
+Run `test/setup.py -h` for detailed usage.
+
+To test `sprout` over an emulated link:
+```
+test/test.py [-t RUNTIME] [-f FLOWS] congestion-control
+```
+
+To setup and test `sprout` over the wide area to a remote machine:
+```
+test/pre_setup.py -r REMOTE:PANTHEON-DIR
+test/setup.py -r REMOTE:PANTHEON-DIR sprout
+test/test.py -r REMOTE:PANTHEON-DIR [-t RUNTIME] [-f FLOWS] sprout
+```
+
+Run `test/test.py -h` for detailed usage.
+
 
 `-f 0` indicates that no tunnels would be created in the tests; otherwise,
 there will be `FLOWS` tunnels created to run a congestion control scheme.
