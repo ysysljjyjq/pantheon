@@ -9,8 +9,11 @@ from tabulate import tabulate
 import plot_summary
 from helpers.pantheon_help import check_call
 
+def fmt(number):
+ return '%.1f' % number
+
 def get_difference(metric_1, metric_2):
-    return '%.1f' % ((100. * abs(metric_1 - metric_2)) / metric_1)
+    return (100. * abs(metric_1 - metric_2)) / metric_1
 
 
 parser = argparse.ArgumentParser()
@@ -42,7 +45,8 @@ exp_1_schemes = set(exp1_data.keys())
 exp_2_schemes = set(exp2_data.keys())
 common_schemes = exp_1_schemes & exp_2_schemes 
 
-output = []
+throughput_lines = []
+delay_lines = []
 
 for scheme in common_schemes:
     exp1_tputs, exp1_delays = [x[0] for x in exp1_data[scheme]], [x[1] for x in exp1_data[scheme]]
@@ -51,17 +55,17 @@ for scheme in common_schemes:
     exp1_mean_throughput = np.mean(exp1_tputs)
     exp2_mean_throughput = np.mean(exp2_tputs)
 
-    output.append([scheme, 'throughput (Mbit/s)', exp1_mean_throughput,
-               exp2_mean_throughput,
-               get_difference(exp1_mean_throughput, exp2_mean_throughput)])
+    throughput_lines.append([scheme, 'throughput (Mbit/s)', fmt(exp1_mean_throughput),
+               fmt(exp2_mean_throughput),
+               fmt(get_difference(exp1_mean_throughput, exp2_mean_throughput))])
     exp1_mean_delay = np.mean(exp1_delays)
     exp2_mean_delay = np.mean(exp2_delays)
 
-    output.append([scheme, 'delay (ms)', exp1_mean_delay,
-               exp2_mean_delay,
-               get_difference(exp1_mean_delay, exp2_mean_delay)])
+    delay_lines.append([scheme, 'delay (ms)', fmt(exp1_mean_delay),
+               fmt(exp2_mean_delay),
+               fmt(get_difference(exp1_mean_delay, exp2_mean_delay))])
 
 output_headers = ['scheme', 'metric', experiment_dirs[0], experiment_dirs[1],
                   'difference %']
 
-print tabulate(output, headers=output_headers)
+print tabulate(throughput_lines + delay_lines, headers=output_headers)
