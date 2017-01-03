@@ -53,9 +53,12 @@ analysis/analysis_pre_setup.py
 
 To perform analysis on experiment logs in the `test/` directory:
 ```
-analysis/analyze.py --data-dir test/
+analyze/analyze.py --data-dir test/
 ```
-This will generate charts and `pantheon_report` pdf in the `data-dir` folder
+This will generate charts and `pantheon_report.pdf `in the `data-dir` folder
+
+
+To compare analysis of two experiment logs one can use `analyze/compare_two_runs.py` on with directories, xz archives, or archive url's from a Pantheon run.
 
 
 ## Running a single congestion control scheme
