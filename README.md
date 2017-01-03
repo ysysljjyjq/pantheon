@@ -69,35 +69,12 @@ test/test.py -r REMOTE:PANTHEON-DIR [-t RUNTIME] [-f FLOWS] sprout
 
 Run `test/test.py -h` for detailed usage and additional optional arguments.
 
+## Running schemes without any logging
+Run `test/pre_setup.py` and `test/setup.py <congestion-control>` first.
 
-`-f 0` indicates that no tunnels would be created in the tests; otherwise,
-there will be `FLOWS` tunnels created to run a congestion control scheme.
-Notice that if `-r` is given, `FLOWS` must be positive.
-
-Alternatively, run
-
+Find running order for scheme:
 ```
-./run.py [-r REMOTE:PANTHEON-DIR] [-t RUNTIME] [-f FLOWS]
-```
-
-## Usage of Individual Scheme
-Change directory to `src` first.
-
-```
-# print the dependencies required to be installed
-./<congestion-control>.py deps
-
-# perform build commands for scheme
-./<congestion-control>.py build
-
-# run initialize commands after building and before running
-./<congestion-control>.py init
-
-# find running order for scheme
 ./<congestion-control>.py who_goes_first
-
-# find friendly name of scheme
-./<congestion-control>.py friendly_name
 ```
 
 Depending on the output of `who_goes_first`, run
