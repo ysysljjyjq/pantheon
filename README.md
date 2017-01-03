@@ -2,7 +2,7 @@
 (https://travis-ci.org/StanfordLPNG/pantheon)
 
 # Disclaimer:
-This is unfinished research software. Multiple scripts run commands as root to install prerequisite programs, etc. Our scripts will write to the filesystem in the pantheon folder and in /tmp/. We have not implemented most of the programs run by our wrappers. Those programs may write to the filesytem (for example, verus will write files like client\_45191.out into the current working directory when it is called). We never run third party programs as root.
+This is unfinished research software. Multiple scripts run commands as root to install prerequisite programs, etc. Our scripts will write to the filesystem in the pantheon folder and in /tmp/. We have not implemented most of the programs run by our wrappers. Those programs may write to the filesytem (for example, Verus will write files like `client\_45191.out` into the current working directory when it is called). We never run third party programs as root.
 
 # Pantheon of Congestion Control
 The Pantheon has wrappers for many popular and research congestion control schemes. It allows them to run over a common interface and has tools to benchmark and compare their performance.
