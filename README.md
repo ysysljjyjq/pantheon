@@ -24,11 +24,6 @@ git submodule update --init
 ```
 
 
-And before perorming analysis run:
-```
-analysis/analysis_pre_setup.py
-```
-
 ## Running the Pantheon
 Currently supported schemes can be found in `src/`. Running:
 
@@ -49,6 +44,19 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 test/run.py --run-only setup
 mm-delay 50 mm-loss uplink .1 mm-loss downlink .1 mm-link /usr/share/mahimahi/traces/TMobile-LTE-short.up /usr/share/mahimahi/traces/TMobile-LTE-short.down -- sh -c 'test/run.py -r $USER@$MAHIMAHI_BASE:pantheon --run-only test'  # assumes pantheon in home directory
 ```
+
+## Pantheon analysis
+And before perorming analysis run:
+```
+analysis/analysis_pre_setup.py
+```
+
+To perform analysis on experiment logs in the `test/` directory:
+```
+analysis/analyze.py --data-dir test/
+```
+This will generate charts and `pantheon_report` pdf in the `data-dir` folder
+
 
 ## Running a single congestion control scheme
 Before performing experiments individually run:
