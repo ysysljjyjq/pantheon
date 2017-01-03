@@ -30,7 +30,7 @@ experiment_dirs = []
 for experiment in experiments:
     if experiment.endswith('.tar.xz'):
         if experiment.startswith('https://'):
-            check_call(['wget', experiment])
+            check_call(['wget', '-c', experiment])
             experiment = experiment[8:] # strip https://
             experiment = experiment.split('/')[-1] # strip url path
         check_call(['tar', 'xJf', experiment])
