@@ -13,7 +13,7 @@ def fmt(number):
     return '{:.2f}'.format(number)
 
 def get_difference(metric_1, metric_2):
-    return '{:+.1f}'.format((100. * (metric_2 - metric_1)) / metric_1)
+    return '{:+.1%}'.format(((metric_2 - metric_1)) / metric_1)
 
 
 parser = argparse.ArgumentParser()
