@@ -3,11 +3,12 @@
 import os
 import sys
 import json
+import time
 import random
 import pantheon_helpers
 import subprocess
 from os import path
-from helpers.pantheon_help import check_call, check_output, parse_remote
+from helpers.pantheon_help import check_call, check_output, parse_remote, Popen
 from helpers.parse_arguments import parse_arguments
 
 
@@ -164,6 +165,7 @@ def main():
         sys.stderr.write('\n')
         for run_id in xrange(1, 1 + args.run_times):
             i = 0
+            procs = []
             for cc in cc_schemes:
                 i += 1
 
@@ -174,12 +176,16 @@ def main():
                 cmd = test_cmd + ['--run-id', str(run_id), cc]
 
                 try:
-                    check_call(cmd)
+                    procs.append(Popen(cmd))
+                    time.sleep(1)
                 except subprocess.CalledProcessError as e:
                     sys.stderr.write('run.py returned %d while r%s' %
                                      (e.returncode, msg[1:]))
                     sys.stderr.write('It\'s output was %s\n' % str(e.output))
                     error_in_test = True
+
+            for proc in procs:
+                proc.communicate()
 
     if error_in_test:
         sys.stderr.write('Error in tests!\n')
