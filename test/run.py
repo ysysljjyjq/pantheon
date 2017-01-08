@@ -177,7 +177,9 @@ def main():
 
                 try:
                     procs.append(Popen(cmd))
-                    time.sleep(1)
+                    time.sleep(2)
+                    if i == 5:
+                        time.sleep(20)
                 except subprocess.CalledProcessError as e:
                     sys.stderr.write('run.py returned %d while r%s' %
                                      (e.returncode, msg[1:]))
