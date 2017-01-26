@@ -17,16 +17,16 @@ env:
     global:
         - EMULATOR_SCHEMES='default_tcp vegas ledbat pcc verus scream sprout webrtc quic'
     matrix:
-        # run calibrated emulators
+        # run calibrated emulators on 9 schemes
         - CMD='travis_extras/calibrated_emulators/run_calibrated_emulator.sh 97.11 1 366 0 0 travis_extras/calibrated_emulators/2017-01-04T07-24-AWS-Brazil-1-to-Brazil-10-runs/ "$EMULATOR_SCHEMES"'
         - CMD='travis_extras/calibrated_emulators/run_calibrated_emulator.sh 117.65 13 144 0 0 travis_extras/calibrated_emulators/2017-01-02T03-54-India-to-AWS-India-10-runs/ "$EMULATOR_SCHEMES"'
         - CMD='travis_extras/calibrated_emulators/run_calibrated_emulator.sh 6.25 152 362 .0025 0 travis_extras/calibrated_emulators/2016-12-30T21-38-China-ppp0-to-AWS-Korea-10-runs/ "$EMULATOR_SCHEMES"'
         - CMD='travis_extras/calibrated_emulators/run_calibrated_emulator.sh 5.65 88 3665 .0026 .0001 travis_extras/calibrated_emulators/2016-12-30T22-50-AWS-Brazil-2-to-Colombia-ppp0-10-runs/ "$EMULATOR_SCHEMES"'
         - CMD='travis_extras/calibrated_emulators/run_calibrated_emulator.sh 13.38 32 37 .003 0 travis_extras/calibrated_emulators/2017-01-03T21-30-Nepal-to-AWS-India-10-runs/ "$EMULATOR_SCHEMES"'
-        # test code for making remote connections
+        # test ./run.py with -r remote option
         - CMD='EXTRA_MAHIMAHI_SHELLS="mm-onoff uplink 5 .1 mm-onoff downlink 5 .1 mm-loss uplink .1 mm-loss downlink .1"; travis_extras/travis_test.sh'
         - CMD='EXTRA_MAHIMAHI_SHELLS="mm-loss uplink .3 mm-loss downlink .3"; RUN_PY_EXTRAS="--sender-side local"; travis_extras/travis_test.sh'
-        # Run setup twice in a row to check for basic idempotency problems
+        # test setup and test for each individual scheme
         - CMD='test/pre_setup.py && test/setup.py quic           && test/setup.py quic           && test/test.py -f 2 -t 10 quic'
         - CMD='test/pre_setup.py && test/setup.py webrtc         && test/setup.py webrtc         && test/test.py -f 2 -t 10 webrtc'
         - CMD='test/pre_setup.py && test/setup.py default_tcp    && test/setup.py default_tcp    && test/test.py -f 2 -t 10 default_tcp'
