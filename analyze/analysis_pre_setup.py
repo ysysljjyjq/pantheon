@@ -13,11 +13,15 @@ def main():
     # prepare /tmp/pantheon-tmp  to store .tex flie
     make_sure_path_exists('/tmp/pantheon-tmp')
 
-    # install texlive, matplotlib, etc.
-    cmd = ('sudo apt-get -yq --force-yes install '
-           'texlive python-matplotlib python-numpy python-tabulate')
+    # install texlive
+    cmd1 = ('sudo apt-get -yq --force-yes install texlive')
+
+    # install python packages
+    cmd2 = ('sudo apt-get -yq --force-yes install '
+            'python-matplotlib python-numpy python-tabulate')
     try:
-        check_call(cmd, shell=True)
+        check_call(cmd1, shell=True)
+        check_call(cmd2, shell=True)
     except:
         sys.stderr.write(
             'Warning: some dependencies may not be installed properly\n')
