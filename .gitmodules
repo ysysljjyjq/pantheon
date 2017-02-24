@@ -50,3 +50,4 @@
 	path = third_party/koho_const_cutoff
 	url = https://github.com/greghill/koho_cc.git
 	branch = koho_const_cutoff
+  ignore = dirty
