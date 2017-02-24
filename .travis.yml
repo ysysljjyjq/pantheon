@@ -5,6 +5,7 @@ services: docker
 branches:
   only:
     - master
+    - koho_const_cutoff
 
 addons:
   apt:
