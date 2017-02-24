@@ -132,8 +132,8 @@ def build_arg_dict():
         'help': 'run times of each test (default 1)',
     }
 
-    cc_schemes = 'default_tcp vegas koho_cc koho_const_cutoff ledbat pcc ' \
-                 'verus scream sprout webrtc quic copa saturator'
+    cc_schemes = 'default_tcp vegas koho_cc koho_const_cutoff ' \
+                 'sprout saturator'
     arg_dict['--schemes'] = {
         'metavar': '\"SCHEME_1 SCHEME_2..\"',
         'action': 'store',
