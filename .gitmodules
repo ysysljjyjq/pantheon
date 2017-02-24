@@ -46,3 +46,7 @@
   path = third_party/pantheon-stimuli
   url = https://github.com/StanfordLPNG/pantheon-stimuli.git
   ignore = dirty
+[submodule "koho_const_cutoff"]
+	path = third_party/koho_const_cutoff
+	url = https://github.com/greghill/koho_cc.git
+	branch = koho_const_cutoff
